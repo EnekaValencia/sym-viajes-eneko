@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %} 
+    {% block navbar %} 
+        {% include 'navbar/public.html.twig' %} 
+    {% endblock %}
+{% extends 'base.html.twig' %}
+
+{% block body %} 
+    <div class="container-fluid alert alert-dark alert-dismissible fade show pt-0 pb-2" role="alert" > 
+        <div class="row"> 
+            <div class="col-10 mx-auto"> 
+                <h2 class="alert-heading display-2">Deestino de Viajes</h2> <hr> 
+                <p class="mb-0 lead">Servicio gratuito cuya finalidad es facilitar el acceso a una guia de viajes.</p> 
+            </div> 
+        </div> 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+            <span aria-hidden="true">&times;</span> 
+        </button> 
+    </div> 
+    <div class="container-fluid"> 
+        <div class="row"> 
+            <div class="col-10 mx-auto"> 
+                <h6 class="lead">A continuación ofrecemos las ofertas de viajes.</h6> 
+            </div> 
+        </div> 
+        <div class="row bg-white"> 
+            <div class="col-8 mx-auto "> 
+                {% for destination in destinations %}
+                    <div class="media py-2"> 
+                        <img class="my-auto card-img" style="width:60px" src="{{ destination.image() }}" alt="imagen del destino"> 
+                        <div class="media-body"> <div class="mx-4 d-flex justify-content-between "> 
+                            <h4 class="p-0"> {{ destination.getName() }} 
+                                <small ><i > {{ destination.getStayingPlace() }}</i></small> 
+                            </h4> 
+                            <a href="{{ path('destinations_show', {'id': destination.getId()}) }}" class="btn btn-outline-primary">More details...</a> 
+                        </div> <div class="px-2"> 
+                            <p class="card-body text-muted mb-0"> {{destination.getDescription() }} </p> 
+                            <p class="card-body text-muted mb-0"> {{destination.getPrice() }} </p>
+                        </div> </div> 
+                    </div> <hr/> 
+                {% endfor %} 
+            </div> 
+        </div> 
+    </div> 
+{% endblock %}
